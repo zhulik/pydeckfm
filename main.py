@@ -1,15 +1,14 @@
 import os
-os.environ['KIVY_METRICS_DENSITY'] = '2.5'
 
-from steamworks import STEAMWORKS as SW
-
-from kivy.properties import ObjectProperty
 from kivy.clock import Clock
-
+from kivy.properties import ObjectProperty
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.spinner import MDSpinner
 
+from steamworks import STEAMWORKS as SW
+
+os.environ["KIVY_METRICS_DENSITY"] = "2.5"
 
 STEAMWORKS = SW()
 VDF_PATH = f"{os.path.dirname(__file__)}/input.vdf"
@@ -38,7 +37,7 @@ class DeckFMApp(MDApp):
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     STEAMWORKS.initialize()
     STEAMWORKS.Input.Init(True)
 

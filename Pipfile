@@ -10,6 +10,12 @@ cython = "*"
 kivymd = "*"
 
 [dev-packages]
+isort="*"
+pylint="*"
+flake8="*"
+black="*"
+twine="*"
+wheel="*"
 
 [requires]
 python_version = "3.11"
