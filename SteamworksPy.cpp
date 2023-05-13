@@ -737,6 +737,13 @@ SW_PY bool ControllerInit(bool bExplicitlyCallRunFrame) {
     return SteamInput()->Init(bExplicitlyCallRunFrame);
 }
 
+SW_PY bool SetInputActionManifestFilePath(const char *path) {
+    if (SteamInput() == NULL) {
+        return false;
+    }
+    return SteamInput()->SetInputActionManifestFilePath(path);
+}
+
 // Syncronize controllers.
 SW_PY void RunFrame() {
     if (SteamInput() == NULL) {

@@ -177,6 +177,10 @@ STEAMWORKS_METHODS = {
         'restype': bool,
         'argtypes': [c_bool]
     },
+    'SetInputActionManifestFilePath': {
+        'restype': bool,
+        'argtypes': [c_char_p]
+    },
     'RunFrame': {
         'restype': None
     },
