@@ -1,14 +1,22 @@
 #:kivy 2.1
 
 
-MDBoxLayout:
-    orientation: "vertical"
-
+DeckFM:
     MDTopAppBar:
         title: "deckfm"
 
     MDSpinner:
-        size_hint: 0.1, 0.1
-        size: dp(46), dp(46)
-        pos_hint: {'center_x': .5, 'center_y': .5}
         active: True
+
+    MDLabel:
+        id: label
+        size_hint: 2,2
+        text: "BLAH"
+
+    Button:
+        size_hint: 1, 0.5
+        text: "Overlay"
+
+        on_press:
+            label.text = str(root.steam.Input.GetConnectedControllers())
+

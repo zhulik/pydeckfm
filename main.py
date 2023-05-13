@@ -2,26 +2,32 @@ import os
 
 from steamworks import STEAMWORKS
 
-# Declare the steamworks variable and create a new instance of the Steamworks class
 steamworks = STEAMWORKS()
-
-# Initialize Steam
 steamworks.initialize()
-my_steam64 = steamworks.Users.GetSteamID()
-my_steam_level = steamworks.Users.GetPlayerSteamLevel()
 
-print(f'Logged on as {my_steam64}, level: {my_steam_level}')
+steamworks.Input.Init(True)
 
 os.environ['KIVY_METRICS_DENSITY'] = '2.5'
 
-import kivymd
+from kivy.properties import ObjectProperty
+from kivy.clock import Clock
 
 from kivymd.app import MDApp
+from kivymd.uix.boxlayout import MDBoxLayout
+
+
+class DeckFM(MDBoxLayout):
+    orientation = "vertical"
+
+    steam = ObjectProperty(steamworks)
+
 
 class DemoApp(MDApp):
-    pass
+    def update(self, dt):
+        steamworks.Input.RunFrame()
 
 
 if __name__ == '__main__':
-    DemoApp().run()
-
+    app = DemoApp()
+    Clock.schedule_interval(app.update, 0.1)
+    app.run()
