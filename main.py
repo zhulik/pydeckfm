@@ -1,5 +1,17 @@
 import os
 
+from steamworks import STEAMWORKS
+
+# Declare the steamworks variable and create a new instance of the Steamworks class
+steamworks = STEAMWORKS()
+
+# Initialize Steam
+steamworks.initialize()
+my_steam64 = steamworks.Users.GetSteamID()
+my_steam_level = steamworks.Users.GetPlayerSteamLevel()
+
+print(f'Logged on as {my_steam64}, level: {my_steam_level}')
+
 os.environ['KIVY_METRICS_DENSITY'] = '2.5'
 
 import kivymd
