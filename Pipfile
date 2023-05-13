@@ -7,7 +7,7 @@ name = "pypi"
 "kivy[sdl2]" = "*"
 "kivy[glew]" = "*"
 cython = "*"
-kivy = "==2.1.0"
+kivymd = "*"
 
 [dev-packages]
 

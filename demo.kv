@@ -1,21 +1,12 @@
 #:kivy 2.1
 
 
-BoxLayout:
-    orientation: 'vertical'
+MDBoxLayout:
+    orientation: "vertical"
 
-    Button:
-        id: btn1
-        text: 'Button 1'
+    MDTopAppBar:
+        title: "deckfm"
 
-    Button:
-        text: btn1.state
-
-    Button:
-        text: 'Button 3'
-
-    Button:
-        text: 'Button 4'
-
-    Button:
-        text: 'Button 5'
+    MDLabel:
+        text: "Content"
+        halign: "center"

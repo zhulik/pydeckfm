@@ -1,20 +1,15 @@
 import os
 
-os.environ['KIVY_METRICS_DENSITY'] = '3'
+os.environ['KIVY_METRICS_DENSITY'] = '2.5'
 
-import kivy
-kivy.require('2.1.0')
+import kivymd
 
-from kivy.app import App
-# from kivy.lang import Builder
-# from kivy.core.window import Window
+from kivymd.app import MDApp
 
-# class MainScreen:
-
-
-class DemoApp(App):
+class DemoApp(MDApp):
     pass
 
 
 if __name__ == '__main__':
     DemoApp().run()
+
