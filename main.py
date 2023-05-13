@@ -8,22 +8,34 @@ from kivy.clock import Clock
 
 from kivymd.app import MDApp
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.spinner import MDSpinner
 
 
 STEAMWORKS = SW()
-VDF_PATH = vdf_path = f"{os.path.dirname(__file__)}/input.vdf"
+VDF_PATH = f"{os.path.dirname(__file__)}/input.vdf"
 
 
 class DeckFM(MDBoxLayout):
     orientation = "vertical"
-
     steam = ObjectProperty(STEAMWORKS)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        Clock.schedule_interval(self.update, 1.0 / 60.0)
 
-class DeckFMApp(MDApp):
+        # Required to make steam believe it's game by rendering a few frames after start
+        load_spinner = MDSpinner()
+        self.add_widget(load_spinner)
+        Clock.schedule_once(lambda _: self.remove_widget(load_spinner), 1)
+
     def update(self, dt):
         STEAMWORKS.run_callbacks()
         STEAMWORKS.Input.RunFrame()
+        self.canvas.ask_update()
+
+
+class DeckFMApp(MDApp):
+    pass
 
 
 if __name__ == '__main__':
@@ -34,5 +46,5 @@ if __name__ == '__main__':
         raise "cannot load input.vdf"
 
     app = DeckFMApp()
-    Clock.schedule_interval(app.update, 1.0 / 60.0)
+
     app.run()
