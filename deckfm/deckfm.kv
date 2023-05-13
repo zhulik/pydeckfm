@@ -1,0 +1,19 @@
+#:kivy 2.1
+
+
+DeckFM:
+    MDTopAppBar:
+        title: "deckfm"
+
+    MDLabel:
+        id: label
+        size_hint: 2,2
+        text: "BLAH"
+
+    Button:
+        size_hint: 1, 0.5
+        text: "Overlay"
+
+        on_press:
+            label.text = str(root.steam.Input.GetConnectedControllers())
+
