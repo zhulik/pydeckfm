@@ -20,7 +20,7 @@ class DeckFM(MDBoxLayout):
     steam = ObjectProperty(STEAMWORKS)
 
 
-class DemoApp(MDApp):
+class DeckFMApp(MDApp):
     def update(self, dt):
         STEAMWORKS.run_callbacks()
         STEAMWORKS.Input.RunFrame()
@@ -33,6 +33,6 @@ if __name__ == '__main__':
     if not STEAMWORKS.Input.SetInputActionManifestFilePath(VDF_PATH):
         raise "cannot load input.vdf"
 
-    app = DemoApp()
+    app = DeckFMApp()
     Clock.schedule_interval(app.update, 1.0 / 60.0)
     app.run()
