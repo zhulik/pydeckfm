@@ -1,0 +1,15 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"kivy[sdl2]" = "*"
+"kivy[glew]" = "*"
+cython = "*"
+kivy = "==2.1.0"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"
