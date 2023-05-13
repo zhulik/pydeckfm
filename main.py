@@ -1,14 +1,14 @@
 import os
 
-from kivy.clock import Clock
-from kivy.properties import ObjectProperty
-from kivymd.app import MDApp
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.spinner import MDSpinner
-
-from steamworks import STEAMWORKS as SW
-
 os.environ["KIVY_METRICS_DENSITY"] = "2.5"
+
+from kivy.clock import Clock  # noqa: E402
+from kivy.properties import ListProperty, ObjectProperty  # noqa: E402
+from kivymd.app import MDApp  # noqa: E402
+from kivymd.uix.boxlayout import MDBoxLayout  # noqa: E402
+from kivymd.uix.spinner import MDSpinner  # noqa: E402
+
+from steamworks import STEAMWORKS as SW  # noqa: E402
 
 STEAMWORKS = SW()
 VDF_PATH = f"{os.path.dirname(__file__)}/input.vdf"
@@ -17,6 +17,7 @@ VDF_PATH = f"{os.path.dirname(__file__)}/input.vdf"
 class DeckFM(MDBoxLayout):
     orientation = "vertical"
     steam = ObjectProperty(STEAMWORKS)
+    controllers = ListProperty([])
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -27,10 +28,22 @@ class DeckFM(MDBoxLayout):
         self.add_widget(load_spinner)
         Clock.schedule_once(lambda _: self.remove_widget(load_spinner), 1)
 
+    def on_controllers(self, _, controllers):
+        handle = STEAMWORKS.Input.GetActionSetHandle("deckfm")
+
+        for controller in controllers:
+            # TODO: if not set yet
+            STEAMWORKS.Input.ActivateActionSet(controller, handle)
+
     def update(self, dt):
         STEAMWORKS.run_callbacks()
         STEAMWORKS.Input.RunFrame()
+        self.controllers = STEAMWORKS.Input.GetConnectedControllers()
         self.canvas.ask_update()
+
+        a = STEAMWORKS.Input.GetDigitalActionHandle("up")
+        for controller in self.controllers:
+            print(STEAMWORKS.Input.GetDigitalActionData(controller, a).bState)
 
 
 class DeckFMApp(MDApp):
