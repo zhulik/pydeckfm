@@ -30,7 +30,7 @@ class Input(EventDispatcher):
         actions = self.manifest["actions"]["deckfm"]
         layers = self.manifest["action_layers"]
 
-        buttons = list(actions["Button"].keys()) + [list(l['Button'].keys())[0] for l in layers.values()]
+        buttons = list(actions["Button"].keys()) + [list(layer["Button"].keys())[0] for layer in layers.values()]
         self.digital_action_handles = {k: self.input.GetDigitalActionHandle(k) for k in buttons}
 
     def on_digital_actions(self, _, actions):

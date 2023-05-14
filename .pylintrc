@@ -16,7 +16,9 @@ disable=missing-function-docstring,
         missing-class-docstring,
         not-callable,
         import-error,
-        wrong-import-position
+        wrong-import-position,
+        no-name-in-module,
+        too-many-ancestors
 
 
 [REFACTORING]

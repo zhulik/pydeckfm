@@ -1,3 +1,4 @@
+import asyncio
 import os
 
 from input import Input
@@ -40,4 +41,6 @@ class DeckFMApp(MDApp):
 
 
 if __name__ == "__main__":
-    DeckFMApp().run()
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(DeckFMApp().async_run())
+    loop.close()
