@@ -1,7 +1,8 @@
 import os
 
+import vdf
 from kivy.event import EventDispatcher
-from kivy.properties import ListProperty
+from kivy.properties import DictProperty, ListProperty
 
 VDF_PATH = f"{os.path.dirname(__file__)}/input.vdf"
 
@@ -11,15 +12,31 @@ class InitError(Exception):
 
 
 class Input(EventDispatcher):
-    controllers = ListProperty([])
+    controllers = ListProperty()
+    digital_actions = DictProperty()
 
     def __init__(self, steam_input) -> None:
+        EventDispatcher.__init__(self)
         self.input = steam_input
 
         steam_input.Init(True)
 
         if not steam_input.SetInputActionManifestFilePath(VDF_PATH):
             raise InitError("cannot load input.vdf")
+
+        with open(VDF_PATH, encoding="utf-8") as file:
+            self.manifest = vdf.parse(file)["Action Manifest"]
+
+        actions = self.manifest["actions"]["deckfm"]
+        layers = self.manifest["action_layers"]
+
+        buttons = list(actions["Button"].keys()) + [list(l['Button'].keys())[0] for l in layers.values()]
+        self.digital_action_handles = {k: self.input.GetDigitalActionHandle(k) for k in buttons}
+
+        print(buttons)
+
+    def on_digital_actions(self, _, actions):
+        print(actions)
 
     def update(self):
         self.input.RunFrame()
@@ -34,6 +51,9 @@ class Input(EventDispatcher):
             self.input.ActivateActionSet(controller, handle)
 
     def _read_input_data(self):
-        a = self.input.GetDigitalActionHandle("up")
+        res = {}
         for controller in self.controllers:
-            print(self.input.GetDigitalActionData(controller, a).bState)
+            for name, handle in self.digital_action_handles.items():
+                res[name] = self.input.GetDigitalActionData(controller, handle).bState
+
+        self.digital_actions = res
