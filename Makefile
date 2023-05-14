@@ -18,11 +18,7 @@ isort:
 flake8:
 	flake8 .
 
-# pylint:
-# 	pylint aiotractive
-
-# dist:
-#         python setup.py sdist bdist_wheel
-#         twine check dist/*
+pylint:
+	pylint deckfm
 
 .PHONY: black isort flake8 pylint lint format dist

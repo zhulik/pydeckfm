@@ -5,6 +5,11 @@ from kivy.properties import ListProperty
 
 VDF_PATH = f"{os.path.dirname(__file__)}/input.vdf"
 
+
+class InitError(Exception):
+    pass
+
+
 class Input(EventDispatcher):
     controllers = ListProperty([])
 
@@ -14,7 +19,7 @@ class Input(EventDispatcher):
         steam_input.Init(True)
 
         if not steam_input.SetInputActionManifestFilePath(VDF_PATH):
-          raise "cannot load input.vdf"
+            raise InitError("cannot load input.vdf")
 
     def update(self):
         self.input.RunFrame()

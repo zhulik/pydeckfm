@@ -14,6 +14,7 @@ from steamworks import STEAMWORKS as SW  # noqa: E402
 STEAMWORKS = SW()
 STEAMWORKS.initialize()
 
+
 class DeckFM(MDBoxLayout):
     orientation = "vertical"
     steam = ObjectProperty(STEAMWORKS)
@@ -28,7 +29,7 @@ class DeckFM(MDBoxLayout):
         self.add_widget(load_spinner)
         Clock.schedule_once(lambda _: self.remove_widget(load_spinner), 1)
 
-    def update(self, dt):
+    def update(self, _dt):
         STEAMWORKS.run_callbacks()
         self.canvas.ask_update()
         self.input.update()

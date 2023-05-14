@@ -1,0 +1,51 @@
+[MASTER]
+
+ignore=GIT
+ignore-paths=^deckfm/steamworks/.*$,
+
+jobs=0
+
+init-hook='import site; sys.path += site.getsitepackages()'
+
+
+
+
+[MESSAGES CONTROL]
+disable=missing-function-docstring,
+        missing-module-docstring,
+        missing-class-docstring,
+        not-callable,
+        import-error,
+        wrong-import-position
+
+
+[REFACTORING]
+
+max-nested-blocks=3
+
+never-returning-functions=sys.exit
+
+good-names=i,
+           j,
+           k,
+           ex,
+           Run,
+           _,
+           fd
+           id,
+           dt,
+           a
+
+
+
+[FORMAT]
+
+max-line-length=120
+
+[DESIGN]
+
+min-public-methods=0
+
+[MISCELLANEOUS]
+
+notes=FIXME,XXX
