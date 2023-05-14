@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+cython = "*"
 "kivy[sdl2]" = "*"
 "kivy[glew]" = "*"
-cython = "*"
 kivymd = "*"
 vdf = "*"
 

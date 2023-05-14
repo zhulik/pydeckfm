@@ -33,8 +33,6 @@ class Input(EventDispatcher):
         buttons = list(actions["Button"].keys()) + [list(l['Button'].keys())[0] for l in layers.values()]
         self.digital_action_handles = {k: self.input.GetDigitalActionHandle(k) for k in buttons}
 
-        print(buttons)
-
     def on_digital_actions(self, _, actions):
         print(actions)
 

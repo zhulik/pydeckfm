@@ -169,7 +169,7 @@
         },
         "kivy": {
             "extras": [
-                "sdl2"
+                "glew"
             ],
             "hashes": [
                 "sha256:1c112bcfaf5caea8648563c7706e038cc51afc8f4b2e7c30088441505c9bd6e5",
