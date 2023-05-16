@@ -1,33 +1,32 @@
 #:kivy 2.1
 
-
-
 MDNavigationLayout:
     ScreenManager:
-        Screen:
-
+        MDScreen:
             BoxLayout:
                 orientation: 'vertical'
 
                 MDTopAppBar:
                     title: "Your App"
-                    left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                    left_action_items: [["menu", lambda x: nav_drawer.set_state("toggle")]]
                 Widget:
 
     MDNavigationDrawer:
         id: nav_drawer
+        type: "standard"
 
-        BoxLayout:
-            orientation: 'vertical'
+        ScrollView:
+            MDList:
+                id: md_list
 
-            MDLabel:
-                text: "  Item 1"
-                font_style: 'Subtitle1'
-                size_hint_y: None
-                height: self.texture_size[1]
+                OneLineIconListItem:
+                    text: "Blah1"
+
+                OneLineIconListItem:
+                    text: "Blah2"
                 
-            MDLabel:
-                text: "  Item 2"
-                font_style: 'Subtitle1'
-                size_hint_y: None
-                height: self.texture_size[1]
+                OneLineIconListItem:
+                    text: "Blah3"
+                
+                OneLineIconListItem:
+                    text: "Blah4"

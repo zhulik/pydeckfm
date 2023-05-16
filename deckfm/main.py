@@ -13,7 +13,7 @@ sys.stdout = LOGGER
 from kivy.clock import Clock  # noqa: E402
 from kivy.properties import ObjectProperty  # noqa: E402
 from kivymd.app import MDApp  # noqa: E402
-from kivymd.uix.screen import Screen  # noqa: E402
+from kivymd.uix.screen import MDScreen  # noqa: E402
 from kivymd.uix.label import MDLabel  # noqa: E402
 from kivymd.uix.spinner import MDSpinner  # noqa: E402
 from steamworks import STEAMWORKS as SW  # noqa: E402
@@ -31,7 +31,7 @@ class LogView(MDLabel):
         self.text = str("\n".join(lines))
 
 
-class DeckFM(Screen):
+class DeckFM(MDScreen):
     orientation = "vertical"
     steam = ObjectProperty(STEAMWORKS)
     input = ObjectProperty(Input(STEAMWORKS.Input))
