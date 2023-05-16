@@ -1,19 +1,22 @@
 #:kivy 2.1
 
-
 DeckFM:
+
     MDTopAppBar:
         title: "deckfm"
 
-    MDLabel:
-        id: label
-        size_hint: 2,2
-        text: "BLAH"
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
+
+        LogView:
+            id: log_view
+            padding: 10, 10
+            size_hint_y: None
 
     Button:
-        size_hint: 1, 0.5
+        size_hint: 1, 0.2
         text: "Overlay"
 
         on_press:
-            label.text = str(root.steam.Input.GetConnectedControllers())
-
+            print("!!!!")

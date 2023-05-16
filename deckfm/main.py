@@ -1,14 +1,20 @@
 import asyncio
 import os
+import sys
 
 from input import Input
+from logger import Logger
 
 os.environ["KIVY_METRICS_DENSITY"] = "2.5"
+
+LOGGER = Logger()
+sys.stdout = LOGGER
 
 from kivy.clock import Clock  # noqa: E402
 from kivy.properties import ObjectProperty  # noqa: E402
 from kivymd.app import MDApp  # noqa: E402
 from kivymd.uix.boxlayout import MDBoxLayout  # noqa: E402
+from kivymd.uix.label import MDLabel  # noqa: E402
 from kivymd.uix.spinner import MDSpinner  # noqa: E402
 from steamworks import STEAMWORKS as SW  # noqa: E402
 
@@ -16,10 +22,20 @@ STEAMWORKS = SW()
 STEAMWORKS.initialize()
 
 
+class LogView(MDLabel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        LOGGER.bind(lines=self._on_logger_lines)
+
+    def _on_logger_lines(self, _, lines):
+        self.text = str("\n".join(lines))
+
+
 class DeckFM(MDBoxLayout):
     orientation = "vertical"
     steam = ObjectProperty(STEAMWORKS)
     input = ObjectProperty(Input(STEAMWORKS.Input))
+    logger = ObjectProperty(LOGGER)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
