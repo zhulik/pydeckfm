@@ -1,22 +1,33 @@
 #:kivy 2.1
 
-DeckFM:
 
-    MDTopAppBar:
-        title: "deckfm"
 
-    ScrollView:
-        do_scroll_x: False
-        do_scroll_y: True
+MDNavigationLayout:
+    ScreenManager:
+        Screen:
 
-        LogView:
-            id: log_view
-            padding: 10, 10
-            size_hint_y: None
+            BoxLayout:
+                orientation: 'vertical'
 
-    Button:
-        size_hint: 1, 0.2
-        text: "Overlay"
+                MDTopAppBar:
+                    title: "Your App"
+                    left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                Widget:
 
-        on_press:
-            print("!!!!")
+    MDNavigationDrawer:
+        id: nav_drawer
+
+        BoxLayout:
+            orientation: 'vertical'
+
+            MDLabel:
+                text: "  Item 1"
+                font_style: 'Subtitle1'
+                size_hint_y: None
+                height: self.texture_size[1]
+                
+            MDLabel:
+                text: "  Item 2"
+                font_style: 'Subtitle1'
+                size_hint_y: None
+                height: self.texture_size[1]
