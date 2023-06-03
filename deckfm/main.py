@@ -9,10 +9,16 @@ from kivy.properties import ObjectProperty  # noqa: E402
 from kivymd.app import MDApp  # noqa: E402
 from kivymd.uix.boxlayout import MDBoxLayout  # noqa: E402
 from kivymd.uix.spinner import MDSpinner  # noqa: E402
+
 from steamworks import STEAMWORKS as SW  # noqa: E402
+from steamworks.exceptions import SteamNotRunningException
 
 STEAMWORKS = SW()
-STEAMWORKS.initialize()
+
+try:
+    STEAMWORKS.initialize()
+except SteamNotRunningException:
+    print("STEAM IS NOT RUNNING")
 
 
 class DeckFM(MDBoxLayout):
