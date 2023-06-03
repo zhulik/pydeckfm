@@ -6,23 +6,18 @@ from kivy.properties import DictProperty, ListProperty
 
 VDF_PATH = f"{os.path.dirname(__file__)}/input.vdf"
 
-
-class InitError(Exception):
-    pass
-
-
 class Input(EventDispatcher):
     controllers = ListProperty()
     digital_actions = DictProperty()
+    ready = False
 
     def __init__(self, steam_input) -> None:
         EventDispatcher.__init__(self)
         self.input = steam_input
 
-        steam_input.Init(True)
+        self.ready = steam_input.Init(True)
 
-        if not steam_input.SetInputActionManifestFilePath(VDF_PATH):
-            raise InitError("cannot load input.vdf")
+        self.ready = steam_input.SetInputActionManifestFilePath(VDF_PATH)
 
         with open(VDF_PATH, encoding="utf-8") as file:
             self.manifest = vdf.parse(file)["Action Manifest"]
